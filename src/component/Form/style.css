@@ -1,10 +1,12 @@
 .content {
     background: #FFFFFF;
 }
-.content-main-layout{
-  padding: 40px 106px;
+.content-main-layout {
+    padding: 40px 106px;
+    box-shadow: 0px 0px 8px 0px #C9C9C940;
+    background-color: transparent !important;
 }
-.form-control {
+.content-main-layout .form-control {
     display: block;
     width: 100%;
     padding: .375rem .75rem;
@@ -18,7 +20,7 @@
     appearance: none;
     border-radius: unset !important;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    border-bottom: 1px solid #ced4da;
+    border-bottom: 1px solid #DBDBDB;
 }
 
 .form-button {
@@ -81,10 +83,12 @@
     border: 2px dashed rgb(204, 204, 204);
     border-radius: 10px;
     text-align: center;
-    padding: 20px;
+    padding: 60px;
     margin: 20px auto;
 }
-
+.uplod-file-img span{
+    display: block;
+}
 @media(max-width:1199px){
     .content-main-layout {
         padding: 40px 65px;

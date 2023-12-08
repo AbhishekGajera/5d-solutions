@@ -10,7 +10,7 @@ const Sidebar = ({openSidebar,setOpenSidebar}) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className={`${openSidebar ? 'mobile-sidebar' : 'left-sidebar  pe-4 pb-3'}`}>
+    <div className={`${openSidebar ? 'mobile-sidebar' : 'left-sidebar  pb-3'}`}>
       <div className='logo mb-3'>
         <a className="navbar-brand" href="#"><img src={logo} alt="img" /></a>
         <span className='close-lcon'><RiCloseCircleFill  onClick={()=> {setOpenSidebar(!openSidebar)}} /></span>
@@ -39,8 +39,8 @@ const Sidebar = ({openSidebar,setOpenSidebar}) => {
           <Collapse in={open}>
             <div id="example-collapse-text">
               <ul>
-                <li className='left-sidebar-inner'><Link to="/form"><span className='left-sidebar-menu'>Form</span></Link></li>
-                <li className='left-sidebar-inner'><Link to="/"><span className='left-sidebar-menu'>Table</span></Link></li>
+              <li className='left-sidebar-inner'><Link to="/"><span className='left-sidebar-menu'>Moment List</span></Link></li>
+                <li className='left-sidebar-inner'><Link to="/form"><span className='left-sidebar-menu'>Add new moment</span></Link></li>
               </ul>
             </div>
           </Collapse>

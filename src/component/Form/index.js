@@ -37,7 +37,7 @@ const Form = () => {
                 <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder='Sample title' />
               </div>
               <Row>
-                <Col lg={5} md={6} sm={6} xl={12}>
+                <Col lg={5} md={6} sm={6} xs={12}>
                   <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label">Tags</label>
                     <input type="text" className="form-control" id="exampleInputPassword1" />
@@ -83,7 +83,7 @@ const Form = () => {
                     </div>
                   </div>
                 </Col>
-                <Col lg={7} md={6} sm={6} xl={12}>
+                <Col lg={7} md={6} sm={6} xs={12}>
                 
                   <div className="uplod-file-img " onClick={handleClick} >
                     <img src={upload} alt='uploade' />
