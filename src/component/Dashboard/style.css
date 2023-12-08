@@ -3,6 +3,7 @@
     min-height: 100vh; */
     background: #FFFFFF;
     /* transition: 0.5s; */
+    margin-top: 50px;
 }
 .dashboard-main i {
     font-size: 48px;

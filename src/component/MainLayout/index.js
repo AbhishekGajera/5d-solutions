@@ -1,7 +1,6 @@
 import React from 'react';
 import Header from '../Header';
 import Sidebar from '../Sidebar';
-import Footer from '../Footer';
 import './style.css';
 export const MainLayout = ({ component }) => {
     return (
@@ -13,7 +12,6 @@ export const MainLayout = ({ component }) => {
                 <div className='right-col'>
                     <Header />
                     {component}
-                    <Footer />
                 </div>
             </div>
 

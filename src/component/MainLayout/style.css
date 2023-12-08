@@ -4,3 +4,12 @@
 .right-col{
     width: 80%;
 }
+@media(max-width:768px){
+.left-col{
+    width: 60px;
+    padding: 10px !important;
+  }
+  .right-col{
+    width: 100%;
+}
+}
