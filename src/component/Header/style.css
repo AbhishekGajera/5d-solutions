@@ -1,13 +1,4 @@
-.navbarStyle {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: auto;
-    z-index: 1030;
-    background-color: #F3F6F9 !important;
-    padding: 0 30px;
-    width: 83%;
-}
+
 .navbarStyle-main{
     display: flex;
     align-items: center;

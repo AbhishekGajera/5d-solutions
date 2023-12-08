@@ -26,7 +26,6 @@
     appearance: none;
     border-radius: unset !important;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    border-bottom: 1px solid #ced4da;
 }
 .form-control:focus{
     border: none;
@@ -37,10 +36,10 @@
     border: none;
     color: #fff;
     font-weight: 500;
-    font-size: 16px;
-    padding: 6px 36px;
+    font-size: 20px;
+    padding: 10px 60px;
     border-radius: 50px;
-    margin-top: 40px;
+    margin: 40px 0;
 }
 
 .submit-main {
@@ -53,7 +52,7 @@
     color: #fff;
 }
 .input-group-prepend{
-    border-bottom: 1px solid #ced4da !important;
+    border-bottom: 1px solid #DBDBDB !important;
 
 }
 .input-group-text{
@@ -66,4 +65,26 @@
     font-weight: 700;
     text-align: center;
     padding: 50px 0;
+}
+.react-tel-input .flag-dropdown {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    border-radius: 3px 0 0 3px;
+}
+.react-tel-input .form-control{
+    border: none;
+}
+.form-label{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    color: #4F4F4F;
+}
+
+.submit-form-main{
+    width: 40%;
 }

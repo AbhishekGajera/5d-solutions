@@ -1,136 +1,22 @@
 
 .left-sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 250px; 
+    width: 258px; 
     height: 100%; 
-    background-color: #F3F6F9; 
+    background-color: transparent; 
     color: #fff; 
     padding: 20px 0;
     overflow-y: auto; 
+    visibility: visible;
   }
   .logo a img {
     width: 90px;
-    margin-left: 40px;
     margin-bottom: 20px;
 }
   
   .left-sidebar a {
     color: #fff;
-    text-decoration: none;  }
-nextfuiu/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    text-decoration: none;  
+  }
   .navbar-nav {
     display: flex;
     flex-direction: column;
@@ -151,6 +37,9 @@ li {
     padding-left: 0;
     margin-bottom: 0;
     list-style: none;
+}
+.left-sidebar-main span{
+  color: #fff;
 }
   .left-sidebar-inner{
     padding: 10px 20px;
@@ -186,6 +75,58 @@ li {
 .left-sidebar-inner:hover i{
     background-color: #F3F6F9;
 }
+svg.close-sidebar {
+  transform: rotate(180deg);
+}
+.close-lcon{
+  display: none;
+}
+.mobile-sidebar {
+  width: 0 !important;
+  visibility: hidden;
+}
+.left-sidebar-main span {
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  align-items: center;
+}
+.logo.mb-3 {
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+}
+@media(max-width:991px){
+  .close-lcon {
+    display: block;
+    font-size: 35px;
+    color: #fff;
+}
+  .mobile-sidebar {
+    position: absolute;
+    z-index: 9999;
+    background-color: #001B30;
+    width: 258px !important;
+    height: 100%;
+    visibility: visible;
+}
+.left-sidebar{
+  width: 0;
+  padding: 0 !important;
+}
+.logo a img {
+  width: 60px;
+  margin-top: 20px;
+}
+.logo.mb-3 {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+}
 @media(max-width: 768px){
   .user-content, .left-sidebar-menu{
     display: none;
@@ -196,8 +137,8 @@ li {
     margin-bottom: 0;
 }
 .left-sidebar {
-  width: 60px;
-    padding: 10px !important;
+  width: 0;
+    padding: 0 !important;
 }
 .left-sidebar-inner {
   padding: 10px 0px;
@@ -210,3 +151,4 @@ li {
   margin-right: 0;
 }
 }
+
