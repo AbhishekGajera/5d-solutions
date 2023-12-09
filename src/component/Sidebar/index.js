@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./style.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { Collapse } from "react-bootstrap";
 import { RiCloseCircleFill } from "react-icons/ri";
@@ -8,6 +8,7 @@ import DropDown from "../../assets/CustomIcon/DropDown";
 
 const Sidebar = ({ openSidebar, setOpenSidebar }) => {
   const [open, setOpen] = useState(true);
+  const location = useLocation();
 
   return (
     <div className={`${openSidebar ? "mobile-sidebar" : "left-sidebar  pb-3"}`}>
@@ -25,8 +26,25 @@ const Sidebar = ({ openSidebar, setOpenSidebar }) => {
       </div>
       <div className="d-flex align-items-center ms-4 mb-4 user-img-main">
         <div className="ms-3 user-content">
-        <Link to="/">
-          <span className="pointer">Profile</span>
+          <Link to="/">
+            <span
+              className={`pointer ${
+                location.pathname === "/" ? "active-link" : ""
+              }`}
+            >
+              Profile
+            </span>
+          </Link>
+        </div>
+        <div className="ms-3 user-content-mobile">
+          <Link to="/">
+            <span
+              className={`pointer ${
+                location.pathname === "/" ? "active-link" : ""
+              }`}
+            >
+              Profile
+            </span>
           </Link>
         </div>
       </div>
@@ -46,13 +64,29 @@ const Sidebar = ({ openSidebar, setOpenSidebar }) => {
             <div id="example-collapse-text">
               <ul>
                 <li className="left-sidebar-inner">
-                  <Link to="/">
-                    <span className="left-sidebar-menu">Moment List</span>
+                  <Link to="/moment-list">
+                    <span
+                      className={`pointer left-sidebar-menu ${
+                        location.pathname === "/moment-list"
+                          ? "active-link"
+                          : ""
+                      }`}
+                    >
+                      Moment List
+                    </span>
                   </Link>
                 </li>
                 <li className="left-sidebar-inner">
                   <Link to="/create-moment">
-                    <span className="left-sidebar-menu">Add new moment</span>
+                    <span
+                      className={`pointer left-sidebar-menu ${
+                        location.pathname === "/create-moment"
+                          ? "active-link"
+                          : ""
+                      }`}
+                    >
+                      Add new moment
+                    </span>
                   </Link>
                 </li>
               </ul>

@@ -18,4 +18,19 @@ const truncateFileName = (fileName, maxLength) => {
   );
 };
 
-export { formatFileSize, truncateFileName };
+const extractNumbers = (str = "") => {
+  // Use a regular expression to match only digits
+  const regex = /\d/g;
+
+  // Use the match method to find all matches in the string
+  const matches = str.match(regex);
+
+  // Join the matched digits into a single string
+  if (matches) {
+    return matches.join("");
+  } else {
+    return null; // Return null if no digits are found
+  }
+};
+
+export { formatFileSize, truncateFileName, extractNumbers };

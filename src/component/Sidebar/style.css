@@ -88,6 +88,14 @@ li.left-sidebar-inner span {
   display: flex;
   justify-content: center;
 }
+.active-link {
+  border-bottom: 1px solid #001B30;
+}
+
+.user-content-mobile {
+  display: none;
+}
+
 @media(max-width:991px){
   .close-lcon {
     display: block;
@@ -123,6 +131,12 @@ li.left-sidebar-inner span {
 @media(max-width: 768px){
   .user-content, .left-sidebar-menu{
     display: none;
+  }
+  .user-content-mobile {
+    display: block;
+  }
+  .user-content-mobile span {
+    color: white !important;
   }
   .logo a img {
     width: 40px ;

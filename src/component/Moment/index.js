@@ -6,16 +6,35 @@ import image from "../../assets/icon/image 1.svg";
 import upload from "../../assets/upload.png";
 import docs from "../../assets/google-docs.png";
 import { formatFileSize, truncateFileName } from "../../utils/helpers";
+import { TagsInput } from "react-tag-input-component";
+import { createNewMoment } from "../../utils/apiUtils";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Moment = () => {
   const {
     handleSubmit,
     register,
     setValue,
-    formState: { errors },
+    formState: { errors, isSubmitted },
   } = useForm();
+
+  const navigate = useNavigate();
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
+  const [selectedTags, setSelectedTags] = useState([]);
+
+  const [tagError, setTagError] = useState(false);
+  const [fileError, setFileError] = useState(false);
+  const [isFileErrorForLength, isSetfileErrorForLength] = useState(false);
+
+  useEffect(() => {
+    setTagError(selectedTags.length === 0);
+  }, [selectedTags, isSubmitted]);
+
+  useEffect(() => {
+    setFileError(selectedFiles.length === 0);
+  }, [selectedFiles, isSubmitted]);
 
   const fileInputRef = useRef(null);
 
@@ -23,8 +42,8 @@ const Moment = () => {
     fileInputRef.current = document.createElement("input");
     fileInputRef.current.type = "file";
     fileInputRef.current.multiple = true;
-    fileInputRef.current.accept = "image/*"; // Only allow image files
-    fileInputRef.current.addEventListener("change", handleFileChange); // Add event listener
+    fileInputRef.current.accept = "image/*";
+    fileInputRef.current.addEventListener("change", handleFileChange);
   }, []);
 
   const handleDragOver = (e) => {
@@ -44,14 +63,20 @@ const Moment = () => {
     handleFiles(files);
   };
 
+  const MAX_FILE_COUNT = 5;
+
   const handleFiles = (files) => {
-    // Only allow image files
     const imageFiles = files.filter((file) => file.type.startsWith("image/"));
 
-    // Update the selectedFiles state based on previous state
-    setSelectedFiles((prevFiles) => [...prevFiles, ...imageFiles]);
+    // Check if adding the files would exceed the maximum file count
+    if (selectedFiles.length + imageFiles.length > MAX_FILE_COUNT) {
+      setFileError(true);
+      isSetfileErrorForLength(true);
+      return;
+    }
 
-    // Set the value using react-hook-form
+    setFileError(false);
+    setSelectedFiles((prevFiles) => [...prevFiles, ...imageFiles]);
     setValue("file", (prevFiles) => [...prevFiles, ...imageFiles]);
   };
 
@@ -59,7 +84,6 @@ const Moment = () => {
     if (fileInputRef.current) {
       fileInputRef.current.addEventListener("change", handleFileChange);
 
-      // Clean up the event listener when the component unmounts
       return () => {
         fileInputRef.current.removeEventListener("change", handleFileChange);
       };
@@ -75,9 +99,44 @@ const Moment = () => {
     fileInputRef.current.click();
   };
 
-  const onSubmit = (data) => {
-    // Handle form submission here
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      // Check for tag and file errors before handling the form submission
+      if (selectedTags.length === 0 || selectedFiles.length === 0) {
+        setTagError(selectedTags.length === 0);
+        setFileError(selectedFiles.length === 0);
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("title", data?.title);
+
+      selectedTags?.map((i) => {
+        formData.append("tags", i);
+      });
+
+      selectedFiles?.map((i) => {
+        formData.append("images", i);
+      });
+
+      await createNewMoment(formData);
+      navigate("/");
+    } catch (error) {
+      toast.error(
+        error?.response?.data?.errors ||
+          error?.response?.data?.message ||
+          error?.message
+      );
+    }
+  };
+
+  const onClickDeleteMessage = (index) => {
+    const data = selectedFiles?.filter((_, i) => i !== index);
+    setSelectedFiles(data);
+
+    if (data?.length < 6) {
+      isFileErrorForLength(false);
+    }
   };
 
   return (
@@ -119,58 +178,70 @@ const Moment = () => {
                       <label htmlFor="tags" className="form-label">
                         Tags
                       </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="tags"
-                        {...register("tags")}
+                      <TagsInput
+                        value={selectedTags}
+                        onChange={setSelectedTags}
+                        name="tags"
+                        placeHolder="Press Enter to create new Tag"
+                        classNames={{ tag: "tag-cls", input: "input-cls" }}
                       />
+                      {isSubmitted && tagError && (
+                        <div className="invalid-feedback d-block">
+                          Please select at least one tag.
+                        </div>
+                      )}
                     </div>
-                    <div>
-                      <h6 className="mb-5">Uploading</h6>
+                    {selectedFiles?.length > 0 && (
                       <div>
-                        {selectedFiles.map((file, index) => (
-                          <div
-                            key={index}
-                            className="d-flex justify-content-between upload-file mb-5"
-                          >
-                            <div className="uplod-img">
-                              <img
-                                src={
-                                  file.type.startsWith("image/") ? image : docs
-                                }
-                                alt="img"
-                              />
-                            </div>
-                            <div>
+                        <h6 className="mb-5">Uploading</h6>
+                        <div>
+                          {selectedFiles.map((file, index) => (
+                            <div
+                              key={index}
+                              className="d-flex justify-content-between upload-file mb-5"
+                            >
+                              <div className="uplod-img">
+                                <img
+                                  src={
+                                    file.type.startsWith("image/")
+                                      ? image
+                                      : docs
+                                  }
+                                  alt="img"
+                                />
+                              </div>
                               <div>
                                 <div>
-                                  <div htmlFor={`file${index}`}>
-                                    {truncateFileName(file.name, 20)}{" "}
-                                    {/* Adjust the desired maxLength */}
+                                  <div>
+                                    <div htmlFor={`file${index}`}>
+                                      {truncateFileName(file.name, 20)}{" "}
+                                    </div>
+                                    <progress
+                                      id={`file${index}`}
+                                      value="0"
+                                      max="100"
+                                    >
+                                      {" "}
+                                      0%{" "}
+                                    </progress>
                                   </div>
-                                  <progress
-                                    id={`file${index}`}
-                                    value="0"
-                                    max="100"
-                                  >
-                                    {" "}
-                                    0%{" "}
-                                  </progress>
-                                </div>
-                                <div className="d-flex justify-content-between">
-                                  <span>0% done</span>
-                                  <span>{formatFileSize(file.size)}</span>
+                                  <div className="d-flex justify-content-between">
+                                    <span>0% done</span>
+                                    <span>{formatFileSize(file.size)}</span>
+                                  </div>
                                 </div>
                               </div>
+                              <div
+                                className="close-icon pointer"
+                                onClick={() => onClickDeleteMessage(index)}
+                              >
+                                <i className="ri-close-line"></i>
+                              </div>
                             </div>
-                            <div className="close-icon">
-                              <i className="ri-close-line"></i>
-                            </div>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </Col>
                   <Col lg={7} md={6} sm={6} xs={12}>
                     <div
@@ -186,7 +257,9 @@ const Moment = () => {
                       {selectedFiles.length > 0 && (
                         <div>
                           <div>
-                            <p>Selected Files count: {selectedFiles?.length}</p>
+                            <p>
+                              SelectedTags Files count: {selectedFiles?.length}
+                            </p>
                           </div>
                         </div>
                       )}
@@ -195,15 +268,7 @@ const Moment = () => {
                         style={{ display: "none" }}
                         ref={fileInputRef}
                         onChange={handleFileChange}
-                        {...register("file", {
-                          required: "File is required",
-                          validate: {
-                            isImage: (value) =>
-                              value && value[0].type.includes("image/")
-                                ? true
-                                : "Only image files are allowed",
-                          },
-                        })}
+                        {...register("file")}
                       />
                       <span>OR</span>
                       <button
@@ -217,6 +282,13 @@ const Moment = () => {
                         {errors.file?.message}
                       </div>
                     </div>
+                    {(isSubmitted || isFileErrorForLength) && fileError && (
+                      <div className="invalid-feedback d-block">
+                        {isFileErrorForLength
+                          ? `Maximum ${MAX_FILE_COUNT} files are allowed`
+                          : "Please select at least one file."}
+                      </div>
+                    )}
                   </Col>
                 </Row>
                 <div className="submit-main">
