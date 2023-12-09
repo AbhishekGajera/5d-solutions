@@ -120,6 +120,7 @@ const Moment = () => {
       });
 
       await createNewMoment(formData);
+      toast.success("Moment Created Succssfully!!")
       navigate("/");
     } catch (error) {
       toast.error(
@@ -218,15 +219,15 @@ const Moment = () => {
                                     </div>
                                     <progress
                                       id={`file${index}`}
-                                      value="0"
+                                      value="100"
                                       max="100"
                                     >
                                       {" "}
-                                      0%{" "}
+                                      100%{" "}
                                     </progress>
                                   </div>
                                   <div className="d-flex justify-content-between">
-                                    <span>0% done</span>
+                                    <span>100% done</span>
                                     <span>{formatFileSize(file.size)}</span>
                                   </div>
                                 </div>
