@@ -28,7 +28,7 @@
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .form-control:focus{
-    border: none;
+    border-color: #000000;
     box-shadow: none;
 }
 .form-button {
@@ -37,9 +37,10 @@
     color: #fff;
     font-weight: 500;
     font-size: 20px;
-    padding: 10px 60px;
+    padding: 8px 60px;
     border-radius: 50px;
     margin: 40px 0;
+    border: 2px solid #001B30;
 }
 
 .submit-main {
@@ -48,9 +49,12 @@
 }
 
 .form-button:hover {
-    background-color: #333 !important;
-    color: #fff;
+    background-color: #fff !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
+    border: 2px solid #001B30;
+    color: #001B30 !important;
 }
+
 .input-group-prepend{
     border-bottom: 1px solid #DBDBDB !important;
 

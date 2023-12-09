@@ -1,11 +1,13 @@
 .content {
     background: #FFFFFF;
 }
+
 .content-main-layout {
     padding: 40px 106px;
     box-shadow: 0px 0px 8px 0px #C9C9C940;
     background-color: transparent !important;
 }
+
 .content-main-layout .form-control {
     display: block;
     width: 100%;
@@ -52,32 +54,45 @@
     font-size: 30px;
 }
 
-.content-main-layout h6{
+.content-main-layout h6 {
     font-size: 20px;
     color: #001B30;
     line-height: 23px;
     font-weight: 700;
 }
+
 .content-submit-btn {
     background-color: #001B30;
     border: none;
     color: #fff;
     font-weight: 500;
     font-size: 20px;
-    padding: 10px 60px;
+    padding: 08px 60px;
     border-radius: 50px;
     margin: 40px 0;
+    border: 2px solid #001B30;
 }
+
 .submit-btn {
     background-color: #001B30;
     border: none;
     color: #fff;
     font-weight: 500;
     font-size: 16px;
-    padding: 5px 26px;
+    padding: 3px 26px;
     border-radius: 50px;
+    border: 2px solid #001B30;
 }
-.uplod-file-img  {
+
+.content-submit-btn:hover,
+.submit-btn:hover {
+    background-color: #fff !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
+    border: 2px solid #001B30;
+    color: #001B30 !important;
+}
+
+.uplod-file-img {
     width: 300px;
     height: 300px;
     border: 2px dashed rgb(204, 204, 204);
@@ -85,47 +100,85 @@
     text-align: center;
     padding: 60px;
     margin: 20px auto;
+    transition: transform 0.3s ease;
 }
-.uplod-file-img span{
+
+.uplod-file-img span {
     display: block;
 }
-@media(max-width:1199px){
+
+.progress-container {
+    width: 50%;
+    margin: 50px auto;
+}
+
+progress {
+    height: 3px;
+    appearance: none;
+    border: none;
+    border-radius: 5px;
+}
+
+progress::-webkit-progress-bar {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+progress::-webkit-progress-value {
+    background-color: #001B30;
+    border-radius: 5px;
+}
+
+.uplod-file-img.dragging {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+@media(max-width:1199px) {
     .content-main-layout {
         padding: 40px 65px;
     }
+
     .upload-file {
         width: 100%;
     }
 }
-@media(max-width:1024px){
+
+@media(max-width:1024px) {
     .content-main-layout {
         padding: 30px 50px;
     }
 }
-@media(max-width:991px){
+
+@media(max-width:991px) {
     .upload-file {
         margin-bottom: 30px !important;
     }
+
     .content-main-layout {
-        padding: 30px ;
+        padding: 30px;
     }
 }
-@media(max-width:767px){
+
+@media(max-width:767px) {
     .uplod-file-img {
         width: 240px;
         height: 270px;
         padding: 58px;
     }
 }
-@media(max-width:575px){
-.content-main-layout {
-    padding: 30px 80px;
+
+@media(max-width:575px) {
+    .content-main-layout {
+        padding: 30px 80px;
+    }
 }
-}
+
 @media(max-width:420px) {
     .uplod-file-img {
         width: 100% !important;
     }
+
     .content-main-layout {
         padding: 30px 10px;
     }

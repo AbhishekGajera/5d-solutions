@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { MainLayout } from './component/MainLayout';
 import { Routes, Route } from 'react-router-dom';
 import Dashboard from './component/Dashboard';
-import Form from './component/Form';
+import Moment from './component/Moment';
 import Signup from './component/Signup';
 
 
@@ -12,7 +12,7 @@ function App() {
     <div className="App">
     <Routes>
       <Route path="/" exact element={<MainLayout component={<Dashboard />} />} />
-      <Route path="/form" exact element={<MainLayout component={<Form />} />} />
+      <Route path="/create-moment" exact element={<MainLayout component={<Moment />} />} />
       <Route path="/signup" exact element={<Signup />} />
 
     </Routes>
